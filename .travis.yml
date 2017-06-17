@@ -91,12 +91,12 @@ install:
   - 'echo "using darwin : cpp98 : ccache clang++ : <warnings>off <cflags>-std=c99 <cxxflags>-std=c++98 <compileflags>-Wno-deprecated-declarations ;" >> ~/user-config.jam'
   - 'echo "using python : 2.7 ;" >> ~/user-config.jam'
   - ccache -V && ccache --show-stats && ccache --zero-stats
-  - if [[ $docs == "1" && $TRAVIS_OS_NAME == "osx" ]]; then rst2html.py --version; fi
+  - if [[ $docs == "1" && $TRAVIS_OS_NAME == "osx" ]]; then /Users/travis/Library/Python/2.7/bin/rst2html.py --version; fi
 
 script:
 # disable invoking docutils for now, until we can have a modern version of it
   - cd docs
-  - if [[ $docs == "1" && $TRAVIS_OS_NAME == "osx" ]]; then make RST2HTML=rst2html.py; fi
+  - if [[ $docs == "1" && $TRAVIS_OS_NAME == "osx" ]]; then make RST2HTML=/Users/travis/Library/Python/2.7/bin/rst2html.py; fi
   - cd ..
 
   - cd test
